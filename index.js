@@ -5,12 +5,13 @@ const STORE = [];
 let input = [];
 
 function getDataFromApi(searchTerm, callback) {
-const findData = {
+  const findData = {
     api_key: etsy_api,
-    q: searchTerm,
-}
+    tags: searchTerm,
+  }
 
-$.getJSON(etsy_url, findData, callback);
+  $.getJSON(etsy_url, findData, callback);
+
 }
 
 function watchSubmit() {
@@ -18,7 +19,6 @@ function watchSubmit() {
     event.preventDefault();
     console.log("Submit button working");
     const queryTarget = $(event.currentTarget).find('.js-search-input');
-    console.log(queryTarget);
     const query = queryTarget.val();
     console.log(query);
     input = query;
@@ -29,14 +29,14 @@ function watchSubmit() {
   });
 }
 
- function displayEtsySearchData(data) {
-    console.log(data);
-    // nextPageToken = data.nextPageToken
-    // prevPageToken = data.prevPageToken
-    data.results.map((item, index) => STORE.push(item));
-    const rawdata = STORE.map(item => renderResult(item));
-    $('.container').html(rawdata);
-  }
+function displayEtsySearchData(data) {
+  console.log(data);
+  // nextPageToken = data.nextPageToken
+  // prevPageToken = data.prevPageToken
+  data.results.map((item, index) => STORE.push(item));
+  const rawdata = STORE.map(item => renderResult(item));
+  $('.container').html(rawdata);
+}
 
 function renderResult(item) {
   return `
@@ -46,7 +46,7 @@ function renderResult(item) {
   `;
 }
 
-function handleEvents(){
+function handleEvents() {
   watchSubmit();
 
 }
