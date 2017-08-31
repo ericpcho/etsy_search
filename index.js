@@ -14,10 +14,10 @@ $.getJSON(etsy_url, findData, callback);
 }
 
 function watchSubmit() {
-  $('.search-form').submit(event => {
+  $('.js-search-form').submit(event => {
     event.preventDefault();
     console.log("Submit button working");
-    const queryTarget = $(event.currentTarget).find('.search-input');
+    const queryTarget = $(event.currentTarget).find('.js-search-input');
     console.log(queryTarget);
     const query = queryTarget.val();
     console.log(query);
@@ -35,7 +35,7 @@ function watchSubmit() {
     // prevPageToken = data.prevPageToken
     data.results.map((item, index) => STORE.push(item));
     const rawdata = STORE.map(item => renderResult(item));
-    $('container').html(results);
+    $('.container').html(rawdata);
   }
 
 function renderResult(item) {
@@ -48,7 +48,6 @@ function renderResult(item) {
 
 function handleEvents(){
   watchSubmit();
-  displayEtsySearchData();
 
 }
 
