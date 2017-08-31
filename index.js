@@ -39,12 +39,17 @@ function displayEtsySearchData(data) {
 }
 
 function renderResult(item) {
+
   return `
-  <div class= "imgdiv">
-      
+  <div class= "imgdiv">  
+    <a class="js-etsy_url" href="${item.url}">click here</a>
   </div>
   `;
 }
+
+
+
+
 
 function handleEvents() {
   watchSubmit();
