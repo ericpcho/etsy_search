@@ -7,7 +7,7 @@ let input = [];
 function getDataFromApi(searchTerm, callback) {
 const findData = {
     api_key: etsy_api,
-    q: searchTerm,
+    tags: searchTerm,
 }
 
 $.getJSON(etsy_url, findData, callback);
@@ -34,21 +34,20 @@ function watchSubmit() {
     // nextPageToken = data.nextPageToken
     // prevPageToken = data.prevPageToken
     data.results.map((item, index) => STORE.push(item));
-    const rawdata = STORE.map(item => renderResult(item));
-    $('container').html(results);
+    const newdata = STORE.map(item => renderResult(item));
+    $('container').html(newdata);
   }
 
 function renderResult(item) {
   return `
   <div class= "imgdiv">
-      
+  
   </div>
   `;
 }
 
 function handleEvents(){
   watchSubmit();
-  displayEtsySearchData();
 
 }
 
