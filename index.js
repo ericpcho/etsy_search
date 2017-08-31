@@ -2,7 +2,7 @@
 const etsy_api = 'zw8s7fttg89x8cm4e4x88n39';
 const etsy_url = 'http://localhost:5000/v2/listings/active';
 const STORE = [];
-let input = []
+let input = [];
 
 function getDataFromApi(searchTerm, callback) {
 const findData = {
@@ -18,7 +18,9 @@ function watchSubmit() {
     event.preventDefault();
     console.log("Submit button working");
     const queryTarget = $(event.currentTarget).find('.search-input');
+    console.log(queryTarget);
     const query = queryTarget.val();
+    console.log(query);
     input = query;
     // clear out the input
     queryTarget.val("");
@@ -27,17 +29,14 @@ function watchSubmit() {
   });
 }
 
-function storeEtsySearchData(data) {
-  console.log(data);
-  // nextPageToken = data.nextPageToken
-  // prevPageToken = data.prevPageToken
-  data.items.map((item, index) => STORE.push(item));
-}
-
-function displayEtsySearchData() {
-  $('container').html(results);
-  const results = STORE.map(item => renderResult(item));
-}
+ function displayEtsySearchData(data) {
+    console.log(data);
+    // nextPageToken = data.nextPageToken
+    // prevPageToken = data.prevPageToken
+    data.results.map((item, index) => STORE.push(item));
+    const rawdata = STORE.map(item => renderResult(item));
+    $('container').html(results);
+  }
 
 function renderResult(item) {
   return `
