@@ -9,6 +9,7 @@ function getDataFromApi(searchTerm, callback) {
   const findData = {
     includes: 'Images(url_570xN)',
     limit: 12,
+    offset: 300,
     api_key: etsy_api,
     tags: searchTerm,
   }
@@ -38,7 +39,7 @@ function storeEtsySearchData(data) {
   // prevPageToken = data.prevPageToken
   data.results.map((item, index) => STORE.push(item));
   // getImgFromApi(storeEtsyImgData);
-  const listingData = STORE.map(item => renderResult(item));
+  const listingData = STORE.splice(0,12).map(item => renderResult(item));
   $('.bottom-half').html(listingData);
 }
 
@@ -55,6 +56,18 @@ function clickThumbnail(){
     console.log(event.currentTarget);
     const imgId = $(event.currentTarget).data('imgid')
     $(".middle-half").html(`<img width="500" height="350" src="${imgId}"></img>`)
+  })
+}
+
+function nextPage(){
+  $('.bottom-half').on("click", ".nextpage-button", event => {
+    getDataFromApi(input, storeEtsySearchData, nextPageToken);
+  })
+}
+
+function previousPage(){
+  $('.bottom-half').on("click", ".prevpage-button", event => {
+    getDataFromApi(input, storeEtsySearchData, prevPageToken);
   })
 }
 
