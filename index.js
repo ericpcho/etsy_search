@@ -43,10 +43,22 @@ function storeEtsySearchData(data) {
 }
 
 function renderResult(item) {
+
   return `
-  <img class= "thumbnails" src="${item.Images[0].url_570xN}">
+  <a data-imgid="${item.Images[0].url_570xN}" class = "thumbnailAnchor">
+  <img class= "thumbnails" src="${item.Images[0].url_570xN}"></a>
   `
 }
+
+function clickThumbnail(){
+  $('.bottom-half').on("click", ".thumbnailAnchor", event => {
+    console.log(event.currentTarget);
+    const imgId = $(event.currentTarget).data('imgid')
+    $(".middle-half").html(`<img width="500" height="350" src="${imgId}"></img>`)
+  })
+}
+
+
 
 // function getImgFromApi(callback) {
 //   const findData = {
@@ -69,7 +81,7 @@ function renderResult(item) {
 
 function handleEvents() {
   watchSubmit();
-
+clickThumbnail();
 }
 
 $(handleEvents);
