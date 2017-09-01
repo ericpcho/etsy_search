@@ -5,3 +5,9 @@
 .bottom-half{
   margin:1 px solid blue;
 }
+
+.thumbnails {
+  padding: 10px;
+  height: 75px;
+  width: 75px;
+}

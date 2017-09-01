@@ -1,22 +1,21 @@
 'use strict'
+const STORE = [];
 const etsy_api = 'zw8s7fttg89x8cm4e4x88n39';
 const etsy_url = 'http://localhost:5000/v2/listings/active';
-const STORE = [];
-let input = [];
+let input;
+
 
 function getDataFromApi(searchTerm, callback) {
   const findData = {
+    includes: 'Images(url_570xN)',
+    limit: 12,
     api_key: etsy_api,
     tags: searchTerm,
-<<<<<<< HEAD
-}
-=======
   }
 
   $.getJSON(etsy_url, findData, callback);
->>>>>>> 9c5234018ebd8530be5e9b433b8703b2cbc32d3d
-
 }
+
 
 function watchSubmit() {
   $('.js-search-form').submit(event => {
@@ -28,48 +27,45 @@ function watchSubmit() {
     input = query;
     // clear out the input
     queryTarget.val("");
-    getDataFromApi(query, displayEtsySearchData);
+    getDataFromApi(query, storeEtsySearchData);
     // $('.js-search-results').removeClass("hidden");
   });
 }
 
-<<<<<<< HEAD
- function displayEtsySearchData(data) {
-    console.log(data);
-    // nextPageToken = data.nextPageToken
-    // prevPageToken = data.prevPageToken
-    data.results.map((item, index) => STORE.push(item));
-    const newdata = STORE.map(item => renderResult(item));
-    $('container').html(newdata);
-  }
-=======
-function displayEtsySearchData(data) {
+function storeEtsySearchData(data) {
   console.log(data);
   // nextPageToken = data.nextPageToken
   // prevPageToken = data.prevPageToken
   data.results.map((item, index) => STORE.push(item));
-  const rawdata = STORE.map(item => renderResult(item));
-  $('.container').html(rawdata);
+  // getImgFromApi(storeEtsyImgData);
+  const listingData = STORE.map(item => renderResult(item));
+  $('.bottom-half').html(listingData);
 }
->>>>>>> 9c5234018ebd8530be5e9b433b8703b2cbc32d3d
 
 function renderResult(item) {
-
   return `
-<<<<<<< HEAD
-  <div class= "imgdiv">
-  
-=======
-  <div class= "imgdiv">  
-    <a class="js-etsy_url" href="${item.url}">click here</a>
->>>>>>> 9c5234018ebd8530be5e9b433b8703b2cbc32d3d
-  </div>
-  `;
+  <img class= "thumbnails" src="${item.Images[0].url_570xN}">
+  `
 }
 
+// function getImgFromApi(callback) {
+//   const findData = {
+//     includes: ['rank'],
+//     api_key: etsy_api,
+//   }
+//   for (let i=0; i<STORE.length; i++){
+//     const etsy_url_image = `http://localhost:5000/v2/listings/${STORE[i].listing_id}/images/`
+//   $.getJSON(etsy_url_image, findData, callback);
+// }}
 
-
-
+// function storeEtsyImgData(data) {
+//   console.log(data);
+//   // nextPageToken = data.nextPageToken
+//   // prevPageToken = data.prevPageToken
+//   data.results.map((item, index) => STORE.push(item));
+//   const imgData = STORE.map(item => renderResult(item));
+//   $('.container').html(imgData);
+// }
 
 function handleEvents() {
   watchSubmit();
