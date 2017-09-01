@@ -30,3 +30,66 @@
 /* #share {
   border: 1px solid black;
 } */
+
+.js-start-page{
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  display: inline-block;
+}
+
+.big-container{
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  display: inline-block;
+}
+
+.middle-half {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  display: inline-block;
+}
+
+ul {
+  list-style: none;
+}
+
+.bottom-half{ 
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  display: inline-block;
+  background-color: #E0E7ED;
+}
+
+.nextpage-button:hover {
+  cursor: pointer;
+}
+
+.prevpage-button:hover {
+  cursor: pointer;
+}
+
+.boldClass {
+  font-weight: bold;
+}
+
+.lightbox
+{
+  width:850px; 
+  background:#fff; 
+  text-align:left; /*resets text alignment from body tag */
+  border:1px solid #ccc;
+  border-top:none; 
+  padding:25px; 
+  /*Let's add some CSS3 styles, these will degrade gracefully in older browser and IE*/
+  border-radius:0 0 5px 5px;
+  -moz-border-radius:0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px; 
+  box-shadow:0 0 5px #ccc;
+  -moz-box-shadow:0 0 5px #ccc;
+  -webkit-box-shadow:0 0 5px #ccc;
+}
+

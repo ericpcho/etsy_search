@@ -1,7 +1,7 @@
 'use strict'
 const STORE = [];
 const etsy_api = 'zw8s7fttg89x8cm4e4x88n39';
-const etsy_url = 'http://localhost:5000/v2/listings/active';
+const etsy_url = 'https://eric-matt-etsy-proxy.herokuapp.com/v2/listings/active';
 let input;
 let nextPage;
 let prevPage;
@@ -73,7 +73,7 @@ function renderResult(item) {
   nextPage > 12 ? $(".prevpage-button").removeClass("hidden") : $(".prevpage-button").addClass("hidden")
 
   return `
-  <a data-imgid="${item.Images[0].url_570xN}" data-imgtitle="${item.title}" data-imgprice="${item.price}" data-imgmaterials="${item.materials}" class = "thumbnailAnchor">
+  <a data-imgurl="${item.url}" data-imgid="${item.Images[0].url_570xN}" data-imgtitle="${item.title}" data-imgprice="${item.price}" data-imgmaterials="${item.materials}" class = "thumbnailAnchor">
   <img class= "thumbnails" src="${item.Images[0].url_570xN}"></a>
   `
 }
@@ -85,15 +85,16 @@ function clickThumbnail(){
     const imgPrice = $(event.currentTarget).data('imgprice')
     const imgMaterials = $(event.currentTarget).data('imgmaterials')
     const imgTitle = $(event.currentTarget).data('imgtitle')
-    $(".middle-half").html(`<img width="450" height="350" src="${imgId}"></img>
+    const imgURL = $(event.currentTarget).data('imgurl')
+    $(".middle-half").html(`<a href = "${imgURL}"><img width="450" height="350" src="${imgId}"></img></a>
     <ul>
-    <li>Title: ${imgTitle}</li>
-    <li>Materials:${imgMaterials}</li>
-    <li>Price:${imgPrice}</li>
+    <li><span class ="boldClass">Title: </span>${imgTitle}</li>
+    <li><span class ="boldClass">Materials: </span>${imgMaterials}</li>
+    <li><span class ="boldClass">Price: </span>${imgPrice}</li>
     </ul>
     <div id="share"></div>`, 
   )
-  $('.middle-half').find("#share").jsSocials({ shares: ["twitter", "pinterest"] })
+  $('.middle-half').find("#share").jsSocials({ shares: ["twitter"] })
   })
 }
 
