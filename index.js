@@ -52,7 +52,7 @@ function renderResult(item) {
   nextPage > 12 ? $(".prevpage-button").removeClass("hidden") : $(".prevpage-button").addClass("hidden")
 
   return `
-  <a data-imgid="${item.Images[0].url_570xN}" class = "thumbnailAnchor">
+  <a data-imgid="${item.Images[0].url_570xN}" data-imgtitle="${item.title}" data-imgprice="${item.price}" data-imgmaterials="${item.materials}" class = "thumbnailAnchor">
   <img class= "thumbnails" src="${item.Images[0].url_570xN}"></a>
   `
 }
@@ -61,7 +61,13 @@ function clickThumbnail(){
   $('.bottom-half').on("click", ".thumbnailAnchor", event => {
     console.log(event.currentTarget);
     const imgId = $(event.currentTarget).data('imgid')
-    $(".middle-half").html(`<img width="500" height="350" src="${imgId}"></img>`)
+    const imgPrice = $(event.currentTarget).data('imgprice')
+    const imgMaterials = $(event.currentTarget).data('imgmaterials')
+    const imgTitle = $(event.currentTarget).data('imgtitle')
+    $(".middle-half").html(`<img width="450" height="350" src="${imgId}"></img><ul><li>Title: ${imgTitle}</li>
+    <li>Materials:${imgMaterials}</li>
+    <li>Price:${imgPrice}</li>
+    </ul>`)
   })
 }
 
