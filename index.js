@@ -3,17 +3,21 @@ const STORE = [];
 const etsy_api = 'zw8s7fttg89x8cm4e4x88n39';
 const etsy_url = 'http://localhost:5000/v2/listings/active';
 let input;
-
+let nextPage;
+let prevPage;
 
 function getDataFromApi(searchTerm, callback) {
   const findData = {
     includes: 'Images(url_570xN)',
     limit: 12,
-    offset: 300,
+    offset: 0,
     api_key: etsy_api,
     tags: searchTerm,
   }
 
+  nextPage = findData.offset + 12
+  prevPage = findData.offset + 12
+  console.log(nextPage);
   $.getJSON(etsy_url, findData, callback);
 }
 
@@ -44,6 +48,8 @@ function storeEtsySearchData(data) {
 }
 
 function renderResult(item) {
+  nextPage > 0 ? $(".nextpage-button").removeClass("hidden") : $(".nextpage-button").addClass("hidden")
+  nextPage > 12 ? $(".prevpage-button").removeClass("hidden") : $(".prevpage-button").addClass("hidden")
 
   return `
   <a data-imgid="${item.Images[0].url_570xN}" class = "thumbnailAnchor">
@@ -59,15 +65,31 @@ function clickThumbnail(){
   })
 }
 
-function nextPage(){
-  $('.bottom-half').on("click", ".nextpage-button", event => {
-    getDataFromApi(input, storeEtsySearchData, nextPageToken);
+function goToNextPage(){
+  $('.js-start-page').on("click", ".nextpage-button", event => {
+    const findData = {
+      includes: 'Images(url_570xN)',
+      limit: 12,
+      offset: nextPage,
+      api_key: etsy_api,
+      tags: input,
+    }
+    nextPage = findData.offset + 12
+    $.getJSON(etsy_url, findData, storeEtsySearchData);
   })
 }
 
-function previousPage(){
-  $('.bottom-half').on("click", ".prevpage-button", event => {
-    getDataFromApi(input, storeEtsySearchData, prevPageToken);
+function goToPrevPage(){
+  $('.js-start-page').on("click", ".prevpage-button", event => {
+    const findData = {
+      includes: 'Images(url_570xN)',
+      limit: 12,
+      offset: nextPage-24,
+      api_key: etsy_api,
+      tags: input,
+    }
+    nextPage = findData.offset+12
+    $.getJSON(etsy_url, findData, storeEtsySearchData);
   })
 }
 
@@ -95,6 +117,8 @@ function previousPage(){
 function handleEvents() {
   watchSubmit();
 clickThumbnail();
+goToNextPage();
+goToPrevPage();
 }
 
 $(handleEvents);
