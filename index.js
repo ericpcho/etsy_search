@@ -39,10 +39,32 @@ function watchSubmit() {
 
 function storeEtsySearchData(data) {
   console.log(data);
-  // nextPageToken = data.nextPageToken
-  // prevPageToken = data.prevPageToken
+
+  if($('.js-option-international').is(':checked') && $('.js-option-madeBy').is(':checked')) {
+    console.log('international checked');
+    data.results.filter(function(item){
+      return item.who_made==="i_made"
+      return item.currency_code!=="USD"
+    }).map((item, index) => STORE.push(item));
+  }
+
+   else if($('.js-option-international').is(':checked')) {
+    console.log('international checked');
+    data.results.filter(function(item){
+      return item.currency_code!=="USD"
+    }).map((item, index) => STORE.push(item));
+  }  
+
+  else if($('.js-option-madeBy').is(':checked')) {
+    console.log('madeBy checked');
+    data.results.filter(function(item){
+      return item.who_made==="i_made"
+    }).map((item, index) => STORE.push(item));
+  } 
+
+  else {
   data.results.map((item, index) => STORE.push(item));
-  // getImgFromApi(storeEtsyImgData);
+  }
   const listingData = STORE.splice(0,12).map(item => renderResult(item));
   $('.bottom-half').html(listingData);
 }
@@ -64,12 +86,53 @@ function clickThumbnail(){
     const imgPrice = $(event.currentTarget).data('imgprice')
     const imgMaterials = $(event.currentTarget).data('imgmaterials')
     const imgTitle = $(event.currentTarget).data('imgtitle')
-    $(".middle-half").html(`<img width="450" height="350" src="${imgId}"></img><ul><li>Title: ${imgTitle}</li>
+    $(".middle-half").html(`<img width="450" height="350" src="${imgId}"></img>
+    <ul>
+    <li>Title: ${imgTitle}</li>
     <li>Materials:${imgMaterials}</li>
     <li>Price:${imgPrice}</li>
-    </ul>`)
+    </ul>
+    <div id="share"></div>`, 
+  )
+  $('.middle-half').find("#share").jsSocials({ shares: ["twitter", "pinterest"] })
   })
 }
+
+
+// function storeEtsySearchData(data) {
+//   console.log(data);
+//   if($('.js-option-international').is(':checked') && $('.js-option-madeBy').is(':checked')) {
+//     console.log('international checked');
+//     data.results.filter(function(item){
+//       return item.currency_code!=="USD"
+//     }).map((item, index) => STORE.push(item));
+//   }
+
+//    else if($('.js-option-international').is(':checked')) {
+//     console.log('international checked');
+//     data.results.filter(function(item){
+//       return item.currency_code!=="USD"
+//     }).map((item, index) => STORE.push(item));
+//   }  
+
+//   else if($('.js-option-madeBy').is(':checked')) {
+//     console.log('madeBy checked');
+//     data.results.filter(function(item){
+//       return item.who_made==="i_made"
+//     }).map((item, index) => STORE.push(item));
+//   } 
+  
+//   else {
+//   data.results.map((item, index) => STORE.push(item));
+//   }
+
+//   const listingData = STORE.map(item => renderResult(item));
+//   $('.bottom-half').html(listingData);
+//   console.log(STORE); 
+// }
+
+
+
 
 function goToNextPage(){
   $('.js-start-page').on("click", ".nextpage-button", event => {

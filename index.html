@@ -6,12 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="jssocials.css">
+  <link rel="stylesheet" href="jssocials-theme-flat.css">
+  <link rel="stylesheet" href="font-awesome.css">
   <title>Esty Finder</title>
 </head>
 
 <body>
+    
   <div class= "middle-half">
-        
+      
  </div>
   <div class="js-start-page">
     <div class="top-half">
@@ -21,8 +25,14 @@
           <label for="query"></label>
           <input type="text" class="js-search-input"></input>
           <button type="submit">Submit Button</button>
+          <div class=".js-filter-searches">
+              <input type="checkbox" class="js-option-international" value="international">International</input><br>
+              <input type="checkbox" class="js-option-madeBy" value="madeBy">Made by seller</input><br>
+              <input type="checkbox" class="js-option-view" value="views">Views</input><br>
+            </div>
         </form>
       </section>
+
     </div>
     <div class="bottom-half">
 
@@ -31,7 +41,22 @@
     <img class="nextpage-button hidden" src="https://www.shareicon.net/data/128x128/2016/09/14/829024_right_282x512.png"></button>
   </div>
   <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script src="jssocials.min.js"></script>
   <script src="index.js"></script>
+  
 </body>
 
 </html>
+
+
+<!-- <section class="container">
+    <form action="#" class="js-search-form">
+      <label for="query"></label>
+      <input type="text" class="js-search-input"></input>
+      <button type="submit">Submit Button</button>
+      <div class=".js-filter-searches">
+        <input type="checkbox" class="js-option-international" value="international">International</input><br>
+        <input type="checkbox" class="js-option-madeBy" value="madeBy">Made by seller</input><br>
+        <input type="checkbox" class="js-option-view" value="views">Views</input><br>
+      </div>
+  </section> -->
