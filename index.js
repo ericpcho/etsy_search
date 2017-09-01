@@ -40,25 +40,24 @@ function watchSubmit() {
 function storeEtsySearchData(data) {
   console.log(data);
 
-  if($('.js-option-international').is(':checked') && $('.js-option-madeBy').is(':checked')) {
+  if($('.js-option-view').is(':checked') && $('.js-option-madeBy').is(':checked')) {
     console.log('international checked');
     data.results.filter(function(item){
-      return item.who_made==="i_made"
-      return item.currency_code!=="USD"
+      return item.views==0 && item.who_made==="i_did"
     }).map((item, index) => STORE.push(item));
   }
 
-   else if($('.js-option-international').is(':checked')) {
+   else if($('.js-option-view').is(':checked')) {
     console.log('international checked');
     data.results.filter(function(item){
-      return item.currency_code!=="USD"
+      return item.views==0
     }).map((item, index) => STORE.push(item));
   }  
 
   else if($('.js-option-madeBy').is(':checked')) {
     console.log('madeBy checked');
     data.results.filter(function(item){
-      return item.who_made==="i_made"
+      return item.who_made==="i_did"
     }).map((item, index) => STORE.push(item));
   } 
 
